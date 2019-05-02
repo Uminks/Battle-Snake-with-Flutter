@@ -1,6 +1,6 @@
 part of game;
 
-final double _gameSizeWidth = 320.0;
+ final double _gameSizeWidth = 320.0;
 double _gameSizeHeight = 320.0;
 
 class GameNode extends NodeWithSize {
@@ -25,10 +25,13 @@ class GameNode extends NodeWithSize {
     addChild(_gameScreen);
 
     _joystick = new VirtualJoystick();
-    _joystick.scale = 0.40;
+    _joystick.scale = 0.50;
+
+
 
     _snake = new Snake(_imageMap);
 
+    _joystick.position = new Offset(50.0,-10.0);
     _gameScreen.addChild(_joystick);
     _gameScreen.addChild(_snake);
   }
