@@ -11,7 +11,6 @@ class Snake extends Node{
 
    addChild(_sprite);
    position = new Offset(160.0, -160.0);
-   print('${_sprite}');
  }
 
  void moveSnake(Offset joystickValue){
@@ -20,8 +19,6 @@ class Snake extends Node{
    double filterFactor = 0.2;
 
    _sprite.rotation = atan2(joystickValue.dy,joystickValue.dx)*(180/3.14);
-
-   print(joystickValue.dy);
 
    position = new Offset(
        GameMath.filter(oldPos.dx, target.dx, filterFactor),
