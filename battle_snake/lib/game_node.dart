@@ -3,12 +3,16 @@ part of game;
 final double _gameSizeWidth = 320.0;
 double _gameSizeHeight = 320.0;
 
-class GameDemoNode extends NodeWithSize {
+class GameNode extends NodeWithSize {
 
+  final GameState _gameState;
   Node _gameScreen;
   VirtualJoystick _joystick;
+  Snake _snake;
+  ImageMap _imageMap;
 
-  GameDemoNode(): super(new Size(320.0, 320.0)) {
+
+  GameNode(this._gameState, this._imageMap): super(new Size(320.0, 320.0)) {
 
     _gameScreen = new Node();
     addChild(_gameScreen);
@@ -16,18 +20,19 @@ class GameDemoNode extends NodeWithSize {
     _joystick = new VirtualJoystick();
     _joystick.scale = 0.40;
 
+
+    _snake = new Snake(_imageMap);
+
    // _joystick.position = new Offset(150.0, -350.0);
     _gameScreen.addChild(_joystick);
+    _gameScreen.addChild(_snake);
 
   }
 
   void update(double n){
-
-    print(_joystick.value);
-
+    _snake.moveSnake(_joystick.value);
+    //print(_joystick.value);
   }
-
-  
 
   void spriteBoxPerformedLayout() {
     _gameSizeHeight = spriteBox.visibleArea.height;
@@ -35,4 +40,14 @@ class GameDemoNode extends NodeWithSize {
   }
 
 }
+
+
+class Level extends Node {
+  Snake snake;
+
+  Level() {
+    position = new Offset(160.0, 0.0);
+  }
+}
+
 
