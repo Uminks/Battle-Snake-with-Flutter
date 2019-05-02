@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:spritewidget/spritewidget.dart';
 
+
 import 'libraries.dart';
+
+
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +27,9 @@ class GameDemoState extends State<GameDemo>{
   }
 
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft
+      ]);
     return new GameScene();
   }
 }
