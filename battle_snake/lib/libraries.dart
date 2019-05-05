@@ -8,5 +8,6 @@ import 'dart:math';
 
 
 part 'snake.dart';
+part 'laser.dart';
 part 'game_state.dart';
 part 'game_node.dart';
