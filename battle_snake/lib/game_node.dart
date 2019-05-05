@@ -1,7 +1,7 @@
 part of game;
 
- final double _gameSizeWidth = 320.0;
-double _gameSizeHeight = 320.0;
+double _gameSizeWidth = 450.0;
+double _gameSizeHeight = 225.0;
 
 class GameNode extends NodeWithSize {
 
@@ -12,7 +12,7 @@ class GameNode extends NodeWithSize {
   ImageMap _imageMap;
   GradientNode _background;
 
-  GameNode(this._gameState, this._imageMap): super(new Size(400.0,400.0)) {
+  GameNode(this._gameState, this._imageMap): super(new Size(_gameSizeWidth,_gameSizeHeight)) {
 
     _background = new GradientNode(
       this.size,
@@ -28,7 +28,6 @@ class GameNode extends NodeWithSize {
     _joystick.scale = 0.50;
 
 
-
     _snake = new Snake(_imageMap);
 
     _joystick.position = new Offset(50.0,-10.0);
@@ -38,6 +37,7 @@ class GameNode extends NodeWithSize {
 
   void update(double n){
     _snake.moveSnake(_joystick.value);
+    _snake.detectCollision();
   }
 
   void spriteBoxPerformedLayout() {
