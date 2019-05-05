@@ -5,6 +5,9 @@ class Snake extends Node{
  Sprite _sprite;
  double _dx, _dy;
 
+ double get dx => _dx;
+ double get dy => _dy;
+
  Snake(this._imageMap){
    _sprite = Sprite.fromImage(_imageMap['assets/Icon.png']);
    _sprite.scale = 0.06;
@@ -14,6 +17,25 @@ class Snake extends Node{
    position = new Offset(160.0, -160.0);
    _dx = 0;
    _dy = 1;
+ }
+
+
+ void detectCollision() {
+
+
+    if(this.position.dx <= 0 || this.position.dy >= 0 || this.position.dx >= 450 || this.position.dy <= -220){
+      
+      ActionTween myTween = new ActionTween<Offset> (
+        (a) => this.position = a,
+        this.position,
+        const Offset(160.0, -160.0),
+        1.0
+      );
+
+      this.actions.run(myTween);
+      
+    }
+
  }
 
  void moveSnake(Offset joystickValue){

@@ -1,7 +1,7 @@
 part of game;
 
- final double _gameSizeWidth = 320.0;
-double _gameSizeHeight = 320.0;
+double _gameSizeWidth = 450.0;
+double _gameSizeHeight = 450.0;
 
 class GameNode extends NodeWithSize {
 
@@ -13,7 +13,7 @@ class GameNode extends NodeWithSize {
   GradientNode _background;
   List<Laser> lasers = <Laser>[];
 
-  GameNode(this._gameState, this._imageMap): super(new Size(400.0,400.0)) { // Node Constructor
+  GameNode(this._gameState, this._imageMap): super(new Size(_gameSizeWidth,_gameSizeHeight)) { // Node Constructor
 
     userInteractionEnabled = true; // Activating user interaction
     handleMultiplePointers = true; // Multiple pointers
@@ -48,7 +48,6 @@ class GameNode extends NodeWithSize {
     _joystick.scale = 0.50;
     _joystick.position = new Offset(50.0,-10.0);
 
-
     _snake = new Snake(_imageMap);
 
 
@@ -69,6 +68,7 @@ class GameNode extends NodeWithSize {
     for (Laser shoot in lasers)
        shoot.move();
 
+    //_snake.detectCollision();
   }
 
   void spriteBoxPerformedLayout() { // Rendering Node object
