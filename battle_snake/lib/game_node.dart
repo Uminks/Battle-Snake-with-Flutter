@@ -10,6 +10,7 @@ class GameNode extends NodeWithSize {
   VirtualJoystick _joystick;
   Snake _snake;
   ImageMap _imageMap;
+   Villian enemy;
   GradientNode _background;
   List<Laser> lasers = <Laser>[];
 
@@ -50,9 +51,10 @@ class GameNode extends NodeWithSize {
 
     _snake = new Snake(_imageMap);
 
-
     _gameScreen.addChild(_joystick);
     _gameScreen.addChild(_snake);
+
+    addEnemy();
 
   }
 
@@ -62,6 +64,11 @@ class GameNode extends NodeWithSize {
       _gameScreen.addChild(shot);
   }
 
+  void addEnemy(){
+       enemy = new Villian(_imageMap);
+      _gameScreen.addChild(enemy);
+  }
+
   void update(double n){ // Updating game state
     _snake.moveSnake(_joystick.value);
 
@@ -69,6 +76,10 @@ class GameNode extends NodeWithSize {
        shoot.move();
 
     _snake.detectCollision();
+
+    enemy.moveVillian(_snake);
+
+    
   }
 
   void spriteBoxPerformedLayout() { // Rendering Node object
