@@ -14,7 +14,7 @@ class Snake extends Node{
    _sprite.rotation = 90.0;
 
    addChild(_sprite);
-   position = new Offset(160.0, -160.0);
+   position = new Offset(170.0, -140.0);
    _dx = 0;
    _dy = 1;
  }
@@ -28,8 +28,9 @@ class Snake extends Node{
       ActionTween myTween = new ActionTween<Offset> (
         (a) => this.position = a,
         this.position,
-        const Offset(160.0, -160.0),
-        1.0
+        const Offset(170.0, -140.0),
+        0.8,
+        Curves.easeIn
       );
 
       this.actions.run(myTween);

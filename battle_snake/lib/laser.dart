@@ -8,8 +8,8 @@ class Laser extends Node{
 
   Laser(this.snake, this._imageMap, Offset joystickValue){
 
-    _sprite = Sprite.fromImage(_imageMap['assets/Icon.png']);
-    _sprite.scale = 0.06;
+    _sprite = Sprite.fromImage(_imageMap['assets/Shot.png']);
+    _sprite.scale = 0.085;
     _sprite.rotation = snake._sprite.rotation;
     position = new Offset(snake.position.dx + (joystickValue.dx * 10), snake.position.dy + (joystickValue.dy * 10));
 

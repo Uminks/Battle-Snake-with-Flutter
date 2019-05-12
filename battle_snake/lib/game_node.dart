@@ -1,7 +1,7 @@
 part of game;
 
 double _gameSizeWidth = 450.0;
-double _gameSizeHeight = 450.0;
+double _gameSizeHeight = 240.0;
 
 class GameNode extends NodeWithSize {
 
@@ -68,7 +68,7 @@ class GameNode extends NodeWithSize {
     for (Laser shoot in lasers)
        shoot.move();
 
-    //_snake.detectCollision();
+    _snake.detectCollision();
   }
 
   void spriteBoxPerformedLayout() { // Rendering Node object

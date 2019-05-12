@@ -11,6 +11,7 @@ import 'package:spritewidget/spritewidget.dart';
 import 'libraries.dart';
 
 GameState _gameState;
+BuildContext device;
 
 AssetBundle _initBundle() {
   if (rootBundle != null)
@@ -24,14 +25,13 @@ ImageMap _imageMap;
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  print('MAIN');
   SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[]);
 
   _imageMap = new ImageMap(_bundle);
   await _imageMap.load(<String>[
     'assets/Icon.png',
+    'assets/Shot.png'
   ]);
-  print('ADDED IMAGES');
 
   _gameState = new GameState();
   runApp(new GameScene(gameState: _gameState));
@@ -50,6 +50,7 @@ class GameSceneState extends State<GameScene> {
     super.initState();
     _game = new GameNode(widget.gameState, _imageMap);
   }
+  
 
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
