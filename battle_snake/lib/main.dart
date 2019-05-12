@@ -56,7 +56,7 @@ class GameSceneState extends State<GameScene> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft
     ]);
-    return new SpriteWidget(_game, SpriteBoxTransformMode.fixedWidth);
+    return new SpriteWidget(_game, SpriteBoxTransformMode.stretch);
   }
 }
 

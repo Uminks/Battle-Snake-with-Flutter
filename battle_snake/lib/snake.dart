@@ -23,7 +23,7 @@ class Snake extends Node{
  void detectCollision() {
 
 
-    if(this.position.dx <= 0 || this.position.dy >= 0 || this.position.dx >= 450 || this.position.dy <= -220){
+    if(this.position.dx <= 0 || this.position.dy >= 0 || this.position.dx >= 450 || this.position.dy <= -240){
       
       ActionTween myTween = new ActionTween<Offset> (
         (a) => this.position = a,
