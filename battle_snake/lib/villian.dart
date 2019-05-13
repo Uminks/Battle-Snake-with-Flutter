@@ -14,45 +14,45 @@ class Villian extends Node {
    _sprite.scale = 0.06;
    _sprite.rotation = 90.0;
 
-    Random random;
+    Random random = new Random();
     double minx = 0, maxx = 0, miny = 0, maxy = 0;
 
-    // int x = random.nextInt(4);
-
-        minx = -5;
-        maxx = -1;
-        miny = -240;
-        maxy = -1;
     
-    /* switch (x) {
+    int x = random.nextInt(4);
+    
+    switch (x) {
       case 0:  //  IZQUIERDA
+
+        minx = (random.nextDouble() * 5) + (-5) ;
+        miny =  (random.nextDouble() * 220) + (-220);
 
         break;
       case 1: // DERECHA
-        minx = 451;
-        maxx = 456;
-        miny = -220;
-        maxy = -1;        
+
+        minx = (random.nextDouble() * 5) + (451) ;
+        miny =  (random.nextDouble() * 220) + (-220);
+ 
         break;
       case 2: // ARRIBA
-        minx = 1; 
-        maxx = 450;
-        miny = -225;
-        maxy = -230;      
+
+        minx = (random.nextDouble() * 450) + (1) ;
+        miny = (random.nextDouble() * -5) + (-230) ;
+  
         break;
       case 3: // ABAJO
-        minx = 1;
-        maxx = 450;
-        miny = 1;
-        maxy = 5;      
+        
+        
+        minx = (random.nextDouble() * 450) + (1) ;
+        miny = (random.nextDouble() * 5) + (1) ;
+  
         break;
       default:
-    } */
+    }
  
 
    addChild(_sprite);
    position = new Offset( 
-      minx,
+      minx ,
       miny
     );
    _dx = 0;
