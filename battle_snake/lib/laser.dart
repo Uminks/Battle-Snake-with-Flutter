@@ -30,4 +30,11 @@ class Laser extends Node{
         GameMath.filter(oldPos.dy, target.dy, filterFactor)
     );
   }
+
+  bool isAllowed(){
+    if(this.position.dx <= 0 || this.position.dy >= 0 || this.position.dx >= 450 || this.position.dy <= -240)
+      return true;
+
+    return false;
+  }
 }
