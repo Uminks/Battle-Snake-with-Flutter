@@ -14,6 +14,8 @@ class GameNode extends NodeWithSize {
   List<Villian> enemies = <Villian>[];
   GradientNode _background;
   Laser shot;
+  int level, xenemy;
+
 
   GameNode(this._gameState, this._imageMap): super(new Size(_gameSizeWidth,_gameSizeHeight)) { // Node Constructor
 
@@ -55,8 +57,24 @@ class GameNode extends NodeWithSize {
     _gameScreen.addChild(_joystick);
     _gameScreen.addChild(_snake);
 
-    Timer.periodic(new Duration(seconds: 3), (Timer t) => addEnemy() );
+    level = 1; xenemy = 0;
+    startTimer();
+ 
 
+  }
+
+  void startTimer(){
+      
+    
+    Timer.periodic(
+      new Duration(seconds: 2), 
+      (Timer t) {
+        addEnemy();
+        if(t.tick == level * 2){
+          t.cancel();
+        } 
+      } 
+    );
 
   }
 
@@ -93,9 +111,19 @@ class GameNode extends NodeWithSize {
     for(Villian e in enemies){
         e.moveVillian(_snake);
         if(shot != null){
-          if(e.checkShotCollision(shot))
+          if(e.checkShotCollision(shot)){
             _gameScreen.removeChild(e);
+            xenemy += 1;
+            enemies.remove(e);
+            break;
+          }
         }
+    }
+
+    if(xenemy == level*2){
+      level += 1;
+      xenemy = 0;
+      startTimer();
     }
     
   }

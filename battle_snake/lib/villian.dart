@@ -5,9 +5,11 @@ class Villian extends Node {
   ImageMap _imageMap;
   Sprite _sprite;
   double _dx, _dy;
+  int _index;
 
   double get dx => _dx;
   double get dy => _dy;
+  int get index => _index;
 
   Villian(this._imageMap){
    _sprite = Sprite.fromImage(_imageMap['assets/EnergyFinal.gif']);
