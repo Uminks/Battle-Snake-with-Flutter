@@ -13,7 +13,7 @@ class GameNode extends NodeWithSize {
   ImageMap _imageMap;
   List<Villian> enemy = <Villian>[];
   GradientNode _background;
-  List<Laser> lasers = <Laser>[];
+  Laser shot;
 
   GameNode(this._gameState, this._imageMap): super(new Size(_gameSizeWidth,_gameSizeHeight)) { // Node Constructor
 
@@ -61,9 +61,17 @@ class GameNode extends NodeWithSize {
   }
 
   void fire(){
-      Laser shot = new Laser(_snake, _imageMap, _joystick.value);
-      lasers.add(shot);
-      _gameScreen.addChild(shot);
+      if(shot == null){
+        shot = new Laser(_snake, _imageMap, _joystick.value);
+        _gameScreen.addChild(shot);
+      }
+  }
+
+  void checkingShoot(){
+      if(shot.isAllowed()){
+        _gameScreen.removeChild(shot);
+        shot = null;
+      }
   }
 
   void addEnemy(){
@@ -75,8 +83,10 @@ class GameNode extends NodeWithSize {
   void update(double n){ // Updating game state
     _snake.moveSnake(_joystick.value);
 
-    for (Laser shoot in lasers)
-       shoot.move();
+    if(shot != null){
+      shot.move();
+      checkingShoot();
+    }
 
     _snake.detectCollision();
 
