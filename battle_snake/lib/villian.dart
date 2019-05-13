@@ -10,8 +10,8 @@ class Villian extends Node {
   double get dy => _dy;
 
   Villian(this._imageMap){
-   _sprite = Sprite.fromImage(_imageMap['assets/Icon.png']);
-   _sprite.scale = 0.06;
+   _sprite = Sprite.fromImage(_imageMap['assets/EnergyFinal.gif']);
+   _sprite.scale = 0.5;
    _sprite.rotation = 90.0;
 
     Random random = new Random();

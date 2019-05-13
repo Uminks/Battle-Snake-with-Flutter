@@ -55,8 +55,7 @@ class GameNode extends NodeWithSize {
     _gameScreen.addChild(_joystick);
     _gameScreen.addChild(_snake);
 
-    addEnemy();
-    addEnemy();
+    Timer.periodic(new Duration(seconds: 3), (Timer t) => addEnemy() );
 
 
   }
