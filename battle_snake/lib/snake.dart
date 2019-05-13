@@ -19,6 +19,13 @@ class Snake extends Node{
    _dy = 1;
  }
 
+ void restartPosition(){
+
+  _sprite.rotation = 90.0;
+  position = new Offset(170.0, -140.0);
+
+ }
+
 
  void detectCollision() {
 

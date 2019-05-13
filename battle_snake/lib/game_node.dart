@@ -124,6 +124,9 @@ class GameNode extends NodeWithSize {
       level += 1;
       xenemy = 0;
       startTimer();
+      _gameScreen.removeChild(shot);
+      shot = null;
+      _snake.restartPosition();
     }
     
   }
