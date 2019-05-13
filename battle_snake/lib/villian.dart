@@ -71,4 +71,12 @@ class Villian extends Node {
 
  }
 
+  bool checkShotCollision(Laser shot){
+
+    if(GameMath.distanceBetweenPoints(position, shot.position) <= 8){
+      return true;
+    }
+    return false;
+  }
+
 }

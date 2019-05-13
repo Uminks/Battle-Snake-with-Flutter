@@ -11,7 +11,7 @@ class GameNode extends NodeWithSize {
   VirtualJoystick _joystick;
   Snake _snake;
   ImageMap _imageMap;
-  List<Villian> enemy = <Villian>[];
+  List<Villian> enemies = <Villian>[];
   GradientNode _background;
   Laser shot;
 
@@ -77,7 +77,7 @@ class GameNode extends NodeWithSize {
 
   void addEnemy(){
        Villian e = new Villian(_imageMap);
-       enemy.add(e);
+       enemies.add(e);
       _gameScreen.addChild(e);
   }
 
@@ -91,7 +91,13 @@ class GameNode extends NodeWithSize {
 
     _snake.detectCollision();
 
-    enemy.forEach((e) => e.moveVillian(_snake));
+    for(Villian e in enemies){
+        e.moveVillian(_snake);
+        if(shot != null){
+          if(e.checkShotCollision(shot))
+            _gameScreen.removeChild(e);
+        }
+    }
     
   }
 
