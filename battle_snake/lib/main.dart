@@ -30,7 +30,8 @@ main() async {
   _imageMap = new ImageMap(_bundle);
   await _imageMap.load(<String>[
     'assets/Icon.png',
-    'assets/Shot.png'
+    'assets/Shot.png',
+    'assets/EnergyFinal.gif'
   ]);
 
   _gameState = new GameState();
