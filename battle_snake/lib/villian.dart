@@ -21,7 +21,7 @@ class Villian extends Node {
 
         minx = -5;
         maxx = -1;
-        miny = -220;
+        miny = -240;
         maxy = -1;
     
     /* switch (x) {
@@ -52,9 +52,9 @@ class Villian extends Node {
 
    addChild(_sprite);
    position = new Offset( 
-                          minx,
-                          miny
-                        );
+      minx,
+      miny
+    );
    _dx = 0;
    _dy = 1;
  }
@@ -63,24 +63,11 @@ class Villian extends Node {
  void moveVillian(Snake snake){
 
     Offset oldPos = position;
-    Offset target;
-
-    double dirx = snake.dx - position.dx;
-    double diry = snake.dy - position.dy;
-    double hyp = sqrt( pow(dirx,2) + pow(diry,2) );
-
-    dirx /= hyp;
-    diry /= hyp;
-
-    target = new Offset( dirx, diry);
-
-    double filterFactor = 0.2;
-
+    double filterFactor = 0.01;
      position = new Offset(
-         GameMath.filter(oldPos.dx, target.dx, filterFactor),
-         GameMath.filter(oldPos.dy, target.dy, filterFactor)
+         GameMath.filter(oldPos.dx, snake.position.dx, filterFactor),
+         GameMath.filter(oldPos.dy, snake.position.dy, filterFactor)
      );
-
 
  }
 
