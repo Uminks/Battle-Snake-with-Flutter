@@ -20,6 +20,7 @@ class GameNode extends NodeWithSize {
   SpriteSheet _spritesUI;
   PlayerState _playerState;
   GameOverCallback _gameOverCallback;
+  Label showLevel, label;
 
 
   GameNode(
@@ -53,14 +54,10 @@ class GameNode extends NodeWithSize {
     );
     super.addChild(_background);
 
-
     _gameScreen = new Node();
     super.addChild(_gameScreen);
 
-
-
     _playerState = new PlayerState(_spritesUI, _gameState);
-
 
     _joystick = new VirtualJoystick();
     _joystick.scale = 0.50;
@@ -73,6 +70,18 @@ class GameNode extends NodeWithSize {
     _gameScreen.addChild(_snake);
 
     level = 1; xenemy = 0;
+
+    
+    label = Label(
+        'Level: ${level} ',
+        textStyle: new TextStyle(
+                    fontFamily: "Mias"
+                  )
+    );
+    label.position = new Offset( 180.0, 10);
+
+
+    addChild(label);
     startTimer();
  
 
@@ -81,10 +90,10 @@ class GameNode extends NodeWithSize {
   void startTimer(){
 
     Timer.periodic(
-      new Duration(seconds: 2), 
+      new Duration(milliseconds: 1000), 
       (Timer t) {
         addEnemy();
-        if(t.tick == level * 3){
+        if(t.tick == level * 4){
           t.cancel();
         } 
       } 
@@ -146,6 +155,7 @@ class GameNode extends NodeWithSize {
             _gameScreen.removeChild(e);
             xenemy += 1;
             enemies.remove(e);
+            e.frame = 0;
 
             _playerState.score += 5;
             _playerState.life += 1;
@@ -154,13 +164,20 @@ class GameNode extends NodeWithSize {
         }
     }
 
-    if(xenemy == level*3){
+    if(xenemy == level*4){
+            
+      removeChild(label);
       level += 1;
       xenemy = 0;
+      label.text = 'Level: ${level} ';
       startTimer();
       _gameScreen.removeChild(shot);
       shot = null;
       _snake.restartPosition();
+      addChild(label);
+      
+
+      
     }
     
   }
