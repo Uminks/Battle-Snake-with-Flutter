@@ -64,6 +64,7 @@ main() async {
   _spriteSheetUI = new SpriteSheet(_imageMap['assets/game_ui.png'], json);
 
   _gameState = new GameState();
+  await _gameState.load();
   runApp(new Game());
 }
 
@@ -101,6 +102,7 @@ class GameDemoState extends State<Game>{
               onGenerateRoute: (RouteSettings settings) {
                 switch (settings.name) {
                   case '/game': return _buildGameSceneRoute();
+                  case '/score': return _buildScoreSceneRoute();
                   default: return _buildMainSceneRoute();
                 }
               }
@@ -115,7 +117,7 @@ class GameDemoState extends State<Game>{
           onGameOver: (int lastScore, int levelReached) {
             setState(() {
               _gameState.lastScore = lastScore;
-              _gameState.reachedLevel = levelReached;
+              _gameState.reachedLevel(levelReached);
             });
           },
           gameState: _gameState
@@ -126,6 +128,12 @@ class GameDemoState extends State<Game>{
   PageRoute _buildMainSceneRoute() {
     return new MaterialPageRoute(builder: (BuildContext context) {
       return new MainScene(gameState: _gameState);
+    });
+  }
+
+  PageRoute _buildScoreSceneRoute() {
+    return new MaterialPageRoute(builder: (BuildContext context) {
+      return new ScoreScene(gameState: _gameState);
     });
   }
 }
@@ -226,7 +234,7 @@ class MainSceneState extends State<MainScene> {
                             height: 93.0,
                             child: new BottomBar2(
                               onPlay: (){
-                                Navigator.pushNamed(context, '/game');
+                                Navigator.pushNamed(context, '/score');
                               },
                             ),
                         )
@@ -244,11 +252,68 @@ class MainSceneState extends State<MainScene> {
   }
 }
 
-class TopBar extends StatelessWidget {
-  TopBar({this.selection, this.onSelectTab, this.gameState});
+class ScoreScene extends StatefulWidget {
+  ScoreScene({
+    this.gameState,
+  });
 
-  final int selection;
-  final SelectTabCallback onSelectTab;
+  final GameState gameState;
+
+  State<ScoreScene> createState() => new ScoreSceneState();
+}
+
+class ScoreSceneState extends State<ScoreScene> {
+
+  void initState() {
+    super.initState();
+  }
+
+  Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft
+    ]);
+    return new CoordinateSystem(
+        systemSize: new Size(450.0, 240.0),
+        child:new DefaultTextStyle(
+          style: new TextStyle(fontFamily: "Mias", fontSize:15.0),
+
+          child: new Container(
+
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage("assets/mainBackground.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+              child: new Stack(
+                  children: <Widget>[
+                    new Column(
+                        children: <Widget>[
+                          new SizedBox(
+                            width: 450.0,
+                            height: 240.0,
+                            child: new TopBar(
+                              onClick: (){
+                                Navigator.pop(context);
+                              },
+                              gameState: _gameState,
+                            ),
+                          )
+                        ]
+                    )
+                  ]
+              )
+          ),
+        )
+    );
+  }
+}
+
+class TopBar extends StatelessWidget {
+  TopBar({this.gameState, this.onClick});
+
+  final VoidCallback onClick;
   final GameState gameState;
 
   Widget build(BuildContext context) {
@@ -256,13 +321,18 @@ class TopBar extends StatelessWidget {
     return new Stack(
         children: <Widget>[
           new Positioned(
-              left: 18.0,
-              top: 13.0,
-              child: new Text(
-                  "This is my topBar",
-                  style: new TextStyle(
-                    fontFamily: "Mias"
-                  ),
+              top: 10.0,
+              left: 20.0,
+              child: new TextureButton(
+                onPressed: onClick,
+                label: "SCORE  ${_gameState.BestScores}",
+                textAlign: TextAlign.center,
+                width: 450.0,
+                height: 240.0,
+                textStyle: new TextStyle(
+                    fontFamily: "Mias",
+                    fontSize: 16.0
+                ),
               )
           ),
         ]

@@ -31,7 +31,7 @@ class Laser extends Node{
     
    
     Offset oldPos = position;
-    Offset target = new Offset(oldPos.dx + (dirx*3), oldPos.dy + (diry*3));
+    Offset target = new Offset(oldPos.dx + (dx*3), oldPos.dy + (dy*3));
 
 
 
