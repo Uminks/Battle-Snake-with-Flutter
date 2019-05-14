@@ -5,13 +5,21 @@ class Laser extends Node{
   Sprite _sprite;
   ImageMap _imageMap;
   double dx, dy;
+  double dirx , diry, hyp;
 
   Laser(this.snake, this._imageMap, Offset joystickValue){
 
     _sprite = Sprite.fromImage(_imageMap['assets/Shot.png']);
+    
     _sprite.scale = 0.085;
     _sprite.rotation = snake._sprite.rotation;
-    position = new Offset(snake.position.dx + (joystickValue.dx * 10), snake.position.dy + (joystickValue.dy * 10));
+    
+    double posx = snake.position.dx + ( joystickValue.dx * 3);
+    double posy = snake.position.dy + (joystickValue.dy * 3);
+    position = new Offset( posx , posy );
+    hyp = sqrt( pow( posx , 2 ) + pow( posy , 2 ) );
+    dirx = posx / hyp;
+    diry = posy / hyp;
 
     dx = snake._dx;
     dy = snake._dy;
@@ -20,8 +28,13 @@ class Laser extends Node{
   }
 
   void move(){
+    
+   
     Offset oldPos = position;
-    Offset target = new Offset(oldPos.dx + dx, oldPos.dy + dy);
+    Offset target = new Offset(oldPos.dx + (dirx*3), oldPos.dy + (diry*3));
+
+
+
 
 
     double filterFactor = 2.5;

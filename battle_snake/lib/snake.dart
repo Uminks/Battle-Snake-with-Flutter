@@ -3,7 +3,7 @@ part of game;
 class Snake extends Node{
  ImageMap _imageMap;
  Sprite _sprite;
- double _dx, _dy;
+ double _dx, _dy, lastdx, lastdy;
 
  double get dx => _dx;
  double get dy => _dy;
@@ -66,6 +66,7 @@ class Snake extends Node{
    Offset oldPos = position;
    Offset target;
    if(joystickValue.dx == 0 && joystickValue.dy == 0) {
+
      target = new Offset(oldPos.dx + (_dx * 3),oldPos.dy + (_dy * 3));
    }
    else {

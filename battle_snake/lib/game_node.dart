@@ -73,7 +73,7 @@ class GameNode extends NodeWithSize {
 
     
     label = Label(
-        'Level: ${level} ',
+        'Level: $level ',
         textStyle: new TextStyle(
                     fontFamily: "Mias"
                   )
