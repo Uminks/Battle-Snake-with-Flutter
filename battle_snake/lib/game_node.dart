@@ -84,7 +84,7 @@ class GameNode extends NodeWithSize {
       new Duration(seconds: 2), 
       (Timer t) {
         addEnemy();
-        if(t.tick == level * 2){
+        if(t.tick == level * 3){
           t.cancel();
         } 
       } 
@@ -127,8 +127,11 @@ class GameNode extends NodeWithSize {
     if(_playerState.life <= 0){
 
       print('END GAME');
-      _playerState.life = 100; //ARREGLAR ENRUTADO
-      //_gameOverCallback(_playerState.score, level);
+      _snake.restartPosition();
+      _playerState.life = 100;
+      level = 1;
+      _gameOverCallback(_playerState.score, level);
+
     }
 
 
@@ -151,7 +154,7 @@ class GameNode extends NodeWithSize {
         }
     }
 
-    if(xenemy == level*2){
+    if(xenemy == level*3){
       level += 1;
       xenemy = 0;
       startTimer();

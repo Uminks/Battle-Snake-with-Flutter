@@ -38,8 +38,27 @@ main() async {
   await _imageMap.load(<String>[
     'assets/Icon.png',
     'assets/Shot.png',
-    'assets/EnergyFinal.gif',
-    'assets/game_ui.png'
+    'assets/game_ui.png',
+    'assets/frame_0.png',
+    'assets/frame_1.png',
+    'assets/frame_2.png',
+    'assets/frame_3.png',
+    'assets/frame_4.png',
+    'assets/frame_5.png',
+    'assets/frame_6.png',
+    'assets/frame_7.png',
+    'assets/frame_8.png',
+    'assets/frame_9.png',
+    'assets/frame_10.png',
+    'assets/frame_11.png',
+    'assets/frame_12.png',
+    'assets/frame_13.png',
+    'assets/frame_14.png',
+    'assets/frame_15.png',
+    'assets/frame_16.png',
+    'assets/frame_17.png',
+    'assets/frame_18.png',
+    'assets/frame_19.png'
   ]);
   String json = await _bundle.loadString('assets/game_ui.json');
   _spriteSheetUI = new SpriteSheet(_imageMap['assets/game_ui.png'], json);

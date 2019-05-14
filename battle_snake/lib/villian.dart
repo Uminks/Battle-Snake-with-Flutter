@@ -6,13 +6,15 @@ class Villian extends Node {
   Sprite _sprite;
   double _dx, _dy;
   int _index;
+  int frame;
 
   double get dx => _dx;
   double get dy => _dy;
   int get index => _index;
 
   Villian(this._imageMap){
-   _sprite = Sprite.fromImage(_imageMap['assets/EnergyFinal.gif']);
+    frame = 0;
+   _sprite = Sprite.fromImage(_imageMap['assets/frame_${frame}.png']);
    _sprite.scale = 0.5;
    _sprite.rotation = 90.0;
 
@@ -70,6 +72,15 @@ class Villian extends Node {
          GameMath.filter(oldPos.dx, snake.position.dx, filterFactor),
          GameMath.filter(oldPos.dy, snake.position.dy, filterFactor)
      );
+
+     frame++;
+     removeChild(_sprite);
+     _sprite = Sprite.fromImage(_imageMap['assets/frame_${frame}.png']);
+    _sprite.scale = 0.5;
+     addChild(_sprite);
+     if(frame == 11){
+       frame = 0;
+     }
 
  }
 
