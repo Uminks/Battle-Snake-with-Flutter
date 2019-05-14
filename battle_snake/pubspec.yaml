@@ -18,7 +18,7 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
+    sdk: flutter    
   spritewidget:
   path_provider:
 
@@ -47,6 +47,12 @@ flutter:
     - assets/EnergyFinal.gif
     - assets/game_ui.png
     - assets/game_ui.json
+    - assets/mainBackground.png
+    - fonts/MiasScribblings.ttf
+  fonts:
+    - family: Mias
+      fonts:
+        - asset: fonts/MiasScribblings.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

@@ -167,31 +167,59 @@ class MainSceneState extends State<MainScene> {
     return new CoordinateSystem(
         systemSize: new Size(450.0, 240.0),
         child:new DefaultTextStyle(
-            style: new TextStyle(fontFamily: "Orbitron", fontSize:15.0),
+            style: new TextStyle(fontFamily: "Mias", fontSize:15.0),
+
+
+            child: new Container(
+
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage("assets/mainBackground.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+
             child: new Stack(
+                
                 children: <Widget>[
+                  
                   new Column(
+                      
                       children: <Widget>[
+
                         new SizedBox(
                             width: 450.0,
-                            height: 90.0,
-                            child: new TopBar(
-                                gameState: widget.gameState
-                            )
+                            height: 50.0,
                         ),
+
                         new SizedBox(
                             width: 320.0,
-                            height: 93.0,
+                            height: 50.0,
                             child: new BottomBar(
                                 onPlay: () {
                                   Navigator.pushNamed(context, '/game');
                                 }
                             )
+                        ),
+
+                        new SizedBox(
+                            width: 320.0,
+                            height: 93.0,
+                            child: new BottomBar2(
+                              onPlay: (){
+                                Navigator.pushNamed(context, '/game');
+                              },
+                            ),
                         )
                       ]
                   )
                 ]
             )
+
+
+            ),
+
+
         )
     );
   }
@@ -213,6 +241,9 @@ class TopBar extends StatelessWidget {
               top: 13.0,
               child: new Text(
                   "This is my topBar",
+                  style: new TextStyle(
+                    fontFamily: "Mias"
+                  ),
               )
           ),
         ]
@@ -233,13 +264,48 @@ class BottomBar extends StatelessWidget {
         children: <Widget>[
           new Positioned(
               left: 120.0,
-              top: 14.0,
+              top: 0.0,
               child: new TextureButton(
                   onPressed: onPlay,
                   label: "PLAY",
                   textAlign: TextAlign.center,
                   width: 181.0,
-                  height: 62.0
+                  height: 60.0,
+                  textStyle: new TextStyle(
+                    fontFamily: "Mias",
+                    fontSize: 24.0
+                  ),
+              )
+          ),
+        ]
+    );
+  }
+}
+
+class BottomBar2 extends StatelessWidget {
+  BottomBar2({this.onPlay, this.onSelectTab, this.gameState});
+
+  final VoidCallback onPlay;
+  final SelectTabCallback onSelectTab;
+  final GameState gameState;
+
+  Widget build(BuildContext context) {
+
+    return new Stack(
+        children: <Widget>[
+          new Positioned(
+              left: 120.0,
+              top: 5.0,
+              child: new TextureButton(
+                  onPressed: onPlay,
+                  label: "SCORE",
+                  textAlign: TextAlign.center,
+                  width: 181.0,
+                  height: 60.0,
+                  textStyle: new TextStyle(
+                    fontFamily: "Mias",
+                    fontSize: 24.0
+                  ),
               )
           ),
         ]
