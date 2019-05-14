@@ -23,27 +23,43 @@ class Snake extends Node{
 
   _sprite.rotation = 90.0;
   position = new Offset(170.0, -140.0);
+  _dx = 0;
+  _dy = 1;
 
  }
 
+ bool checkEnemyCollision(List<Villian> enemies){
 
- void detectCollision() {
+   for(Villian e in enemies){
+     if(GameMath.distanceBetweenPoints(position, e.position) <= 10){
+       return true;
+     }
+   }
+
+   return false;
+ }
+
+ bool detectCollision() {
 
 
     if(this.position.dx <= 0 || this.position.dy >= 0 || this.position.dx >= 450 || this.position.dy <= -240){
       
-      ActionTween myTween = new ActionTween<Offset> (
+      /*ActionTween myTween = new ActionTween<Offset> (
         (a) => this.position = a,
         this.position,
         const Offset(170.0, -140.0),
         0.8,
-        Curves.easeIn
+        //Curves.easeIn
       );
 
-      this.actions.run(myTween);
-      
+      this.actions.run(myTween);*/
+      this.position = new Offset(170.0, -140.0);
+      _sprite.rotation = 90.0;
+      _dx = 0;
+      _dy = 1;
+      return true;
     }
-
+    return false;
  }
 
  void moveSnake(Offset joystickValue){

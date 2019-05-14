@@ -4,6 +4,8 @@ part of game;
 double _gameSizeWidth = 450.0;
 double _gameSizeHeight = 240.0;
 
+typedef void GameOverCallback(int score, int levelReached);
+
 class GameNode extends NodeWithSize {
 
   final GameState _gameState;
@@ -15,9 +17,17 @@ class GameNode extends NodeWithSize {
   GradientNode _background;
   Laser shot;
   int level, xenemy;
+  SpriteSheet _spritesUI;
+  PlayerState _playerState;
+  GameOverCallback _gameOverCallback;
 
 
-  GameNode(this._gameState, this._imageMap): super(new Size(_gameSizeWidth,_gameSizeHeight)) { // Node Constructor
+  GameNode(
+      this._gameState,
+      this._spritesUI,
+      this._imageMap,
+      this._gameOverCallback
+  ): super(new Size(_gameSizeWidth,_gameSizeHeight)) { // Node Constructor
 
     userInteractionEnabled = true; // Activating user interaction
     handleMultiplePointers = true; // Multiple pointers
@@ -48,12 +58,17 @@ class GameNode extends NodeWithSize {
     super.addChild(_gameScreen);
 
 
+
+    _playerState = new PlayerState(_spritesUI, _gameState);
+
+
     _joystick = new VirtualJoystick();
     _joystick.scale = 0.50;
     _joystick.position = new Offset(50.0,-10.0);
 
     _snake = new Snake(_imageMap);
 
+    _gameScreen.addChild(_playerState);
     _gameScreen.addChild(_joystick);
     _gameScreen.addChild(_snake);
 
@@ -64,8 +79,7 @@ class GameNode extends NodeWithSize {
   }
 
   void startTimer(){
-      
-    
+
     Timer.periodic(
       new Duration(seconds: 2), 
       (Timer t) {
@@ -106,15 +120,32 @@ class GameNode extends NodeWithSize {
       checkingShoot();
     }
 
-    _snake.detectCollision();
+    if(_snake.detectCollision()){
+      _playerState.life -= 10;
+    }
+
+    if(_playerState.life <= 0){
+
+      print('END GAME');
+      _playerState.life = 100; //ARREGLAR ENRUTADO
+      //_gameOverCallback(_playerState.score, level);
+    }
+
+
+    if(_snake.checkEnemyCollision(enemies)){
+      _playerState.life -= 0.3;
+    }
 
     for(Villian e in enemies){
         e.moveVillian(_snake);
         if(shot != null){
-          if(e.checkShotCollision(shot)){
+          if(e.checkShotCollision(shot)) {
             _gameScreen.removeChild(e);
             xenemy += 1;
             enemies.remove(e);
+
+            _playerState.score += 5;
+            _playerState.life += 1;
             break;
           }
         }
