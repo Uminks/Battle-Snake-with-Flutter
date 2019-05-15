@@ -14,7 +14,7 @@ class Villian extends Node {
 
   Villian(this._imageMap){
     frame = 0;
-   _sprite = Sprite.fromImage(_imageMap['assets/frame_${frame}.png']);
+   _sprite = Sprite.fromImage(_imageMap['assets/frame_$frame.png']);
    _sprite.scale = 0.5;
    _sprite.rotation = 90.0;
 
@@ -75,7 +75,7 @@ class Villian extends Node {
 
      frame++;
      removeChild(_sprite);
-     _sprite = Sprite.fromImage(_imageMap['assets/frame_${frame}.png']);
+     _sprite = Sprite.fromImage(_imageMap['assets/frame_$frame.png']);
     _sprite.scale = 0.5;
      addChild(_sprite);
      if(frame == 11){

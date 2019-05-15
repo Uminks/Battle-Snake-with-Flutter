@@ -33,10 +33,6 @@ class Laser extends Node{
     Offset oldPos = position;
     Offset target = new Offset(oldPos.dx + (dx*3), oldPos.dy + (dy*3));
 
-
-
-
-
     double filterFactor = 2.5;
     position = new Offset(
         GameMath.filter(oldPos.dx, target.dx, filterFactor),

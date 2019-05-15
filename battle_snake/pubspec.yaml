@@ -68,6 +68,7 @@ flutter:
     - assets/frame_17.png
     - assets/frame_18.png
     - assets/frame_19.png
+    - assets/arrow.png
   fonts:
     - family: Mias
       fonts:

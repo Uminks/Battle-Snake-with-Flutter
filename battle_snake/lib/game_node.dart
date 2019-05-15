@@ -93,7 +93,7 @@ class GameNode extends NodeWithSize {
       new Duration(milliseconds: 1000), 
       (Timer t) {
         addEnemy();
-        if(t.tick == level * 4){
+        if(t.tick == level * 5){
           t.cancel();
         } 
       } 
@@ -130,7 +130,8 @@ class GameNode extends NodeWithSize {
     }
 
     if(_snake.detectCollision()){
-      _playerState.life -= 10;
+      _playerState.life -= 20;
+      _playerState.score -= (5*level);
     }
 
     if(_playerState.life <= 0){
@@ -145,7 +146,7 @@ class GameNode extends NodeWithSize {
 
 
     if(_snake.checkEnemyCollision(enemies)){
-      _playerState.life -= 0.3;
+      _playerState.life -= 0.5;
     }
 
     for(Villian e in enemies){
@@ -157,27 +158,32 @@ class GameNode extends NodeWithSize {
             enemies.remove(e);
             e.frame = 0;
 
-            _playerState.score += 5;
+            _playerState.score += (5*level);
             _playerState.life += 1;
             break;
           }
         }
     }
 
-    if(xenemy == level*4){
+    if(xenemy == level*5){
             
       removeChild(label);
       level += 1;
       xenemy = 0;
-      label.text = 'Level: ${level} ';
+      label.text = 'Level: $level ';
       startTimer();
       _gameScreen.removeChild(shot);
       shot = null;
       _snake.restartPosition();
       addChild(label);
-      
+    
+    }
 
-      
+    if(level > 5){
+      _snake.restartPosition();
+      _playerState.life = 100;
+      level = 1;
+      _gameOverCallback(_playerState.score, level);
     }
     
   }
@@ -187,7 +193,16 @@ class GameNode extends NodeWithSize {
     _gameScreen.position = new Offset(0.0, _gameSizeHeight);
   }
 
+  void endGame(){
+      _snake.restartPosition();
+      _playerState.life = 100;
+      level = 1;
+      _gameOverCallback(_playerState.score, level);
+  }
+
 }
+
+
 
 class GradientNode extends NodeWithSize {
   GradientNode(Size size, this.colorTop, this.colorBottom) : super(size);

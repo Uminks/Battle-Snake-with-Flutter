@@ -1,9 +1,7 @@
 
 import 'dart:async';
-import 'dart:ui' as ui;
 
 import 'package:flutter/painting.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -38,6 +36,7 @@ main() async {
   await _imageMap.load(<String>[
     'assets/Icon.png',
     'assets/Shot.png',
+    'assets/arrow.png',
     'assets/game_ui.png',
     'assets/frame_0.png',
     'assets/frame_1.png',
@@ -292,7 +291,7 @@ class ScoreSceneState extends State<ScoreScene> {
                         children: <Widget>[
                           new SizedBox(
                             width: 450.0,
-                            height: 240.0,
+                            height: 200.0,
                             child: new TopBar(
                               onClick: (){
                                 Navigator.pop(context);
@@ -315,17 +314,34 @@ class TopBar extends StatelessWidget {
 
   final VoidCallback onClick;
   final GameState gameState;
-
+  double post = -60;
+ 
   Widget build(BuildContext context) {
 
     return new Stack(
         children: <Widget>[
           new Positioned(
-              top: 10.0,
+              top: -50.0,
               left: 20.0,
               child: new TextureButton(
                 onPressed: onClick,
-                label: "SCORE  ${_gameState.BestScores}",
+                label: "SCORES",
+                textAlign: TextAlign.center,
+                width: 450.0,
+                height: 200.0,
+                textStyle: new TextStyle(
+                    fontFamily: "Mias",
+                    fontSize: 16.0
+                ),
+              )
+          ),
+          
+           new Positioned(
+                top: post += 25,
+                left: 20.0,
+                child: new TextureButton(
+                onPressed: onClick,
+                label: " ${ _gameState.BestScores } ",
                 textAlign: TextAlign.center,
                 width: 450.0,
                 height: 240.0,
@@ -335,6 +351,7 @@ class TopBar extends StatelessWidget {
                 ),
               )
           ),
+         
         ]
     );
   }

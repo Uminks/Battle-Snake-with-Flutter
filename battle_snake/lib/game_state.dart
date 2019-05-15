@@ -5,7 +5,7 @@ class GameState {
   int _lastScore = 0;
   int _reachedLevel = 0;
   List<dynamic> _BestScores = new List<int>();
-
+  
   int get lastScore => _lastScore;
   List<dynamic> get BestScores => _BestScores;
   set lastScore(int lastScore) {
